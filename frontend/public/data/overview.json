@@ -1,0 +1,66 @@
+{
+  "source_grid": "giki_campus_grid.json",
+  "overview": {
+    "eco_resilience": {
+      "value": 62,
+      "bucket": "Moderate Resilience",
+      "tier": "composite",
+      "formula": "100 - weighted_avg(waste_pressure, water_exposure, food_web_exposure, carbon_footprint)",
+      "weights": { "waste_pressure": 0.4, "water_exposure": 0.3, "food_web_exposure": 0.2, "carbon_footprint": 0.1 }
+    },
+    "waste_pressure": {
+      "value": 49,
+      "bucket": "Moderate",
+      "unit": "/100",
+      "tier": "measured",
+      "formula": "100 * (0.6*mean_risk + 0.4*high_fraction)"
+    },
+    "water_exposure": {
+      "value": 27,
+      "bucket": "Low",
+      "unit": "/100",
+      "tier": "derived",
+      "formula": "0.55 * waste_pressure",
+      "note": "coefficient assumption based on typical drainage transport rates; not directly measured from imagery."
+    },
+    "food_web_exposure": {
+      "value": 15,
+      "bucket": "Low",
+      "unit": "/100",
+      "tier": "derived",
+      "formula": "0.55 * water_exposure",
+      "note": "bioaccumulation proxy derived from water exposure; not directly measured from imagery."
+    },
+    "carbon_footprint": {
+      "value": 1.45,
+      "bucket": "Moderate",
+      "unit": "tCO2/day",
+      "tier": "assumed",
+      "formula": "1.1*(1+high_fraction)*0.9",
+      "note": "not from imagery; based on assumed campus emissions baseline scaled by waste risk fraction."
+    }
+  },
+  "scenario": {
+    "scenario_name": "Eco Intervention Scenario",
+    "active": true,
+    "interventions": {
+      "Waste Interception": "50%",
+      "Drainage Filtration": "30%",
+      "Green Buffer": "20%",
+      "Renewable Energy": "40%"
+    },
+    "adjusted": {
+      "eco_resilience": 78,
+      "waste_pressure": 24,
+      "water_exposure": 19,
+      "food_web_exposure": 12,
+      "carbon_footprint": 0.87
+    },
+    "key_highlights": {
+      "resilience_increase_pct": 26,
+      "water_exposure_reduced_pct": 30,
+      "food_web_reduced_pct": 20,
+      "carbon_reduced_pct": 40
+    }
+  }
+}
