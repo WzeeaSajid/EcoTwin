@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+outputs/
+data/augmented/
+data/processed/
+models/*.pt
